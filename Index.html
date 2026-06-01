@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para Ti Nahi ❤️</title>
+
+<style>
+body{
+    margin:0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg,#ff9933,#ffffff,#138808);
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.container{
+    width:90%;
+    max-width:700px;
+    background:white;
+    padding:30px;
+    border-radius:20px;
+    box-shadow:0 0 20px rgba(0,0,0,0.2);
+    text-align:center;
+}
+
+button{
+    background:#ff9933;
+    color:white;
+    border:none;
+    padding:12px 20px;
+    border-radius:10px;
+    cursor:pointer;
+    font-size:16px;
+}
+
+input{
+    padding:10px;
+    width:80%;
+    margin-top:10px;
+}
+
+.hidden{
+    display:none;
+}
+
+h1{
+    color:#c45b00;
+}
+
+.correct{
+    color:green;
+}
+
+.error{
+    color:red;
+}
+</style>
+<link rel="stylesheet" href="Nahi.css">
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- SOBRE -->
+    <div id="sobre">
+        <h1>✉️ Para ti Nahi</h1>
+        <p>Abre este sobre...</p>
+        <button onclick="abrirSobre()">Abrir</button>
+    </div>
+
+    <!-- INTRO -->
+    <div id="intro" class="hidden">
+        <h1>😏</h1>
+
+        <p>
+        ¿Creíste que iba a haber algo?
+        </p>
+
+        <p>
+        Pues sí... pero primero tienes que resolver estos acertijos.
+        Nada difícil. 😎
+        </p>
+
+        <button onclick="nivel1()">Comenzar</button>
+    </div>
+
+    <!-- NIVEL 1 -->
+<!-- NIVEL 1 -->
+
+<div id="n1" class="hidden">
+
+<h2>Nivel 1 📚</h2>
+
+<p>
+¿Cuál es la derivada de:
+</p>
+
+<h2>(3x² + 1)⁵</h2>
+
+<div style="text-align:left;max-width:450px;margin:auto;">
+
+<button onclick="respuestaDerivada(true)">
+A) 30x(3x²+1)⁴
+</button>
+
+<br>
+
+<button onclick="respuestaDerivada(false)">
+B) 15x²(3x²+1)⁴
+</button>
+
+<br>
+
+<button onclick="respuestaDerivada(false)">
+C) 5(3x²+1)⁴
+</button>
+
+<br>
+
+<button onclick="respuestaDerivada(false)">
+D) 30(3x²+1)⁵
+</button>
+
+</div>
+
+<p id="msg1"></p>
+
+</div>
+
+    <!-- NIVEL 2 -->
+    <div id="n2" class="hidden">
+
+        <h2>Nivel 2 🎁</h2>
+
+        <p>
+        ¿Qué es lo que me regalaste?
+        </p>
+
+        <button onclick="respuestaRegalo(1)">Comida</button>
+        <button onclick="respuestaRegalo(2)">Chalina</button>
+
+        <br><br>
+
+        <button onclick="respuestaRegalo(3)">Dinero</button>
+        <button onclick="respuestaRegalo(4)">Tu amistad</button>
+
+        <p id="msg2"></p>
+
+    </div>
+
+    <!-- NIVEL 3 -->
+    <div id="n3" class="hidden">
+
+        <h2>Antes del gran final... 👀</h2>
+
+        <p>
+        Hola, soy Mike jaja.
+        </p>
+
+        <p>
+        Sé que no me conoces mucho,
+        pero me importas mucho.
+        </p>
+
+        <p>
+        Solo quería decirte eso,
+        porque la canción explica algo XD.
+        </p>
+
+        <p>
+        Bien random...
+        pero antes de continuar:
+        </p>
+
+        <p>
+        ¿Qué es lo que me parece genial de ti?
+        </p>
+
+        <input id="respuestaLibre">
+
+        <br><br>
+
+        <button onclick="continuarFinal()">
+            Continuar
+        </button>
+
+    </div>
+
+    <!-- FINAL -->
+   <div id="final" class="hidden">
+
+<h1>🎉 Felicidades 🎉</h1>
+
+<p>
+Has desbloqueado la recompensa.
+</p>
+
+<p>
+Gracias por seguir el juego 🌸
+</p>
+
+<audio controls>
+<source src="diferencia.ogg" type="audio/ogg">
+</audio>
+
+<br><br>
+
+<p style="font-size:18px">
+
+Solo andaba medio pensando algo,
+pero sé que ayer el código Morse que me mandaste fue lindo xD.
+
+<br><br>
+
+E igual aprecio mucho cómo eres.
+
+<br><br>
+
+Ahora no sé si esto te anime con algo,
+pero jaja, espero te haya gustado. 🌸
+
+</p>
+
+</div>
+
+</div>
+
+<script>
+
+function abrirSobre(){
+    document.getElementById("sobre").classList.add("hidden");
+    document.getElementById("intro").classList.remove("hidden");
+}
+
+function nivel1(){
+    document.getElementById("intro").classList.add("hidden");
+    document.getElementById("n1").classList.remove("hidden");
+}
+
+function verificarDerivada(){
+
+let r = document
+.getElementById("derivada")
+.value
+.toLowerCase();
+
+if(
+r.includes("30") &&
+r.includes("(3x") &&
+r.includes("^4")
+){
+    document.getElementById("msg1").innerHTML =
+    "<span class='correct'>Correcto 😎</span>";
+
+    setTimeout(()=>{
+        document.getElementById("n1").classList.add("hidden");
+        document.getElementById("n2").classList.remove("hidden");
+    },1000);
+}
+else{
+    document.getElementById("msg1").innerHTML =
+    "<span class='error'>Intenta otra vez 😅</span>";
+}
+
+}
+
+function respuestaRegalo(opcion){
+
+if(opcion===2){
+
+document.getElementById("msg2").innerHTML =
+"<span class='correct'>Correcto 😎</span>";
+
+setTimeout(()=>{
+document.getElementById("n2").classList.add("hidden");
+document.getElementById("n3").classList.remove("hidden");
+},1000);
+
+}
+else{
+
+document.getElementById("msg2").innerHTML =
+"<span class='error'>Nope 😆</span>";
+
+}
+
+}
+
+function continuarFinal(){
+
+let texto =
+document.getElementById("respuestaLibre").value;
+
+if(texto.trim() !== ""){
+
+document.getElementById("n3").classList.add("hidden");
+document.getElementById("final").classList.remove("hidden");
+
+}
+else{
+
+alert("Escribe algo 😭");
+
+}
+
+}
+
+</script>
+<div id="petalos"></div>
+<script src="NahiXD.js"></script>
+</body>
+</html>
